@@ -12,5 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('tasks', JSON.stringify(tasks))
     }
 
-    
+    const renderTasks = () => {
+        taskList.innerHTML = ''
+
+        tasks.array.forEach(task => {
+            const li = document.createElement('li')
+            li.setAttribute('data-id', task.id)
+
+            if (task.completed) {
+                li.classList.add('completed')
+            }
+
+            li.innerHTML = `
+            <input type="checkbox"
+            `
+        });
+    }
 })
