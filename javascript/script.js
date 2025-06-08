@@ -37,5 +37,38 @@ document.addEventListener('DOMContentLoaded', () => {
         updateFooter()
         saveTasks()
     }
+
+    const updateFooter = () => {
+        const totalTasks = tasks.length
+        const completedTasks = tasks.filter(task => task.completed).length
+
+        taskCounter.textContent = `${completedTasks} of ${totalTasks} tasks done`
+
+        const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0
+        progressBar.style.width = `${progress}%`
+    }
+
+    taskForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const tasktext = taskInput.ariaValueMax.trim()
+
+        if (tasktext !== '') {
+            tasks.push({
+                id: Date.now(),
+                text: tasktext,
+                completed: false
+            })
+            taskInput.value = ''
+            renderTasks()
+        }
+    })
     
+    taskList.addEventListener('click', (e) => {
+        const target = e.target
+        const li = target.closest('li')
+        if (!li) return
+
+        const taskId = Number(li.getAttribute('data-id'))
+        const task = tasks.find(t => t.id === taskId)
+    })
 })
