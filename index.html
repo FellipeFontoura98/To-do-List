@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-do List</title>
+    <title>To-Do List</title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/font-awesome/6.5.2/css/all.min.css">s
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
     <div class="todo-container">
-
+        
         <div class="todo-header">
-            <h1>TODO LIST</h1>
+            <h1>TODOLIST</h1>
             <form id="task-form">
-                <input type="text" id="task-input" placeholder="Digite uma tarefa" required>
+                <input type="text" id="task-input" placeholder="what needs to be done?">
                 <button type="submit">+</button>
             </form>
         </div>
-
+        
         <ul id="task-list"></ul>
-    
-        <div id="todo-footer">
-            <div id="progress-bar-conteiner">
+        
+        <div class="todo-footer">
+            <div id="progress-bar-container">
                 <div id="progress-bar"></div>
             </div>
             <span id="task-counter"></span>
-            <button id="remove-checked-btn">remove checked <i class="fa-solid fa-xmark"></i></button>
+            <button id="remove-checked-btn">Remove checked <i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
-        <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>

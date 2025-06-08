@@ -24,8 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             li.innerHTML = `
-            <input type="checkbox"
-            `
+            <input type="checkbox" ${task.completed ? 'checked' : ''}>
+            <span class="task-text">${task.text}</span>
+            <div class=task-actions">
+                <i class="fa-solid fa-pencil edit-btn"></i>
+                <i class="fa-solid fa-xmark delet-btn"></i>
+            </div>
+            `;
+            taskList.appendChild(li)
         });
+
+        updateFooter()
+        saveTasks()
     }
+    
 })
