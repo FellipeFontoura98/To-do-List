@@ -50,3 +50,8 @@ h1 {
     padding: 12px 30px;
     border-bottom: 1px solid #f0f0f0;
 }
+
+#task-list li.completed {
+    color: #9b9b9b;
+    text-decoration: line-through;
+}
