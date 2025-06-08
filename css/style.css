@@ -154,3 +154,23 @@ body {
     border-radius: 5px;
     transition: width 0.3s ease;
 }
+
+#task-counter {
+    color: #9b9b9b;
+    font-size: 14px;
+}
+
+#remove-checked-btn {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: none;
+    transition: background-color 0.2s;
+}
+
+#remove-checked-btn:hover {
+    background-color: #357abd;
+}
