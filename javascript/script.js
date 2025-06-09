@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderTasks = () => {
         taskList.innerHTML = ''
 
-        tasks.array.forEach(task => {
+        tasks.forEach(task => {
             const li = document.createElement('li')
             li.setAttribute('data-id', task.id)
 
@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
             li.innerHTML = `
             <input type="checkbox" ${task.completed ? 'checked' : ''}>
             <span class="task-text">${task.text}</span>
-            <div class=task-actions">
+            <div class="task-actions">
                 <i class="fa-solid fa-pencil edit-btn"></i>
-                <i class="fa-solid fa-xmark delet-btn"></i>
+                <i class="fa-solid fa-xmark delete-btn"></i>
             </div>
             `;
             taskList.appendChild(li)
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        const tasktext = taskInput.ariaValueMax.trim()
+        const tasktext = taskInput.value.trim()
 
         if (tasktext !== '') {
             tasks.push({
@@ -98,7 +98,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (newText) {
                     task.text = newText
                 }
+                renderTasks()
             }
+
+            input.addEventListener('blur', saveEdit)
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    saveEdit()
+                }
+            })
         }
     })
+
+    removeCheckedBtn.addEventListener('click', () => {
+        tasks = tasks.filter(task => !task.completed)
+        renderTasks()
+    })
+
+    renderTasks()
 })
