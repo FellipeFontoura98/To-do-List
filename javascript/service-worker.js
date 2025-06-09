@@ -1,10 +1,12 @@
 const CACHE_NAME = 'todo-list-cache-v1';
+// CAMINHOS CORRIGIDOS para corresponder à sua estrutura de pastas
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/style.css',
-  '/script.js'
-  // Adicione aqui os ícones se tiver
+  'index.html',
+  'css/style.css',
+  'javascript/script.js',
+  'manifest/manifest.json'
+  // Adicione aqui os caminhos para os ícones, ex: 'images/icon-192.png'
 ];
 
 self.addEventListener('install', event => {
