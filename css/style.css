@@ -1,11 +1,17 @@
+/* Importa a fonte Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* Estilos gerais com a nova fonte */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Fundo com gradiente suave */
 body {
-    background-color: #4A90E2;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,164 +19,195 @@ body {
     padding: 20px;
 }
 
-.todo-container {
-    max-width: 600px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+/* Animação para os elementos aparecerem */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* Container principal com efeito de vidro fosco */
+.todo-container {
+    width: 100%;
+    max-width: 550px;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Cabeçalho */
 .todo-header {
     padding: 25px 30px;
-    border-bottom: 1px solid #f0f0f0;
 }
 
 .todo-header h1 {
-    color: #4a4a4a;
+    color: #333;
     text-align: center;
-    font-weight: bold;
+    font-weight: 600;
     letter-spacing: 2px;
-    margin-bottom: 20px;}
+    margin-bottom: 20px;
+}
 
 #task-form {
     display: flex;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
 }
 
 #task-input {
     flex-grow: 1;
-    border: 1px solid #dcdcdc;
-    border-radius: 4px 0 0 4px;
+    border: 2px solid transparent;
+    border-radius: 8px 0 0 8px;
     padding: 12px 15px;
     font-size: 16px;
     outline: none;
+    transition: border-color 0.3s;
 }
 
-#task-input::placeholder {
-    color: #b0b0b0;
+#task-input:focus {
+    border-color: #667eea;
 }
 
 #task-form button {
-    background-color: #4A90E2;
+    background-color: #667eea;
     color: white;
     border: none;
     padding: 0 20px;
     font-size: 24px;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 8px 8px 0;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 #task-form button:hover {
-    background-color: #357abd;
+    background-color: #5a6fd5;
+    transform: scale(1.05);
 }
 
+/* Animação para as tarefas entrarem na lista */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Lista de Tarefas */
 #task-list {
     list-style: none;
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
 #task-list li {
     display: flex;
     align-items: center;
-    padding: 12px 30px;
+    padding: 15px 30px;
     font-size: 16px;
-    color: #4a4a4a;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background-color 0.2s;
+    color: #444;
+    border-top: 1px solid #f0f0f0;
+    animation: slideIn 0.4s ease-out;
 }
 
-#task-list li.completed {
-    color: #9b9b9b;
+#task-list li.completed .task-text {
+    color: #aaa;
     text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #bbb;
 }
 
-#task-list li:last-child {
-    border-bottom: none;
-}
-
+/* Checkbox Personalizado */
 #task-list input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
     margin-right: 15px;
-    width: 20px;
-    height: 20px;
     cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#task-list input[type="checkbox"]:hover {
+    border-color: #667eea;
+}
+
+#task-list input[type="checkbox"]:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+#task-list input[type="checkbox"]:checked::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 12px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #task-list .task-text {
     flex-grow: 1;
+    transition: color 0.3s;
 }
 
+/* Ações de Editar/Deletar */
 #task-list .task-actions {
     display: flex;
-    gap: 15px;
+    gap: 10px;
+    margin-left: auto;
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.3s;
+}
+
+#task-list li:hover .task-actions {
+    opacity: 1; /* Aparece ao passar o mouse na tarefa */
 }
 
 #task-list .task-actions i {
     color: #9b9b9b;
     cursor: pointer;
-    transition: color 0.2s;
+    padding: 5px;
+    transition: color 0.3s, transform 0.2s;
 }
 
 #task-list .task-actions i:hover {
-    color: #4a4a4a;
+    color: #667eea;
+    transform: scale(1.2);
 }
 
-/* .task.actions {
-    margin-left: auto;
-    display: flex;
-    gap: 15px;
-}
-
-.task.actions i {
-    cursor: pointer;
-}
-
-.task.actions i:hover {
-    color: #4a4a4a;
-} */
-
+/* Rodapé */
 .todo-footer {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background-color: #f7f7f7;
-    border-top: 1px solid #e0e0e0;
-}
-
-#progress-bar-container {
-    width: 100%;
-    height: 10px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-#progress-bar {
-    width: 0%;
-    height: 100%;
-    background-color: #83d348;
-    border-radius: 5px;
-    transition: width 0.3s ease;
+    padding: 20px 30px;
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 #task-counter {
-    color: #9b9b9b;
-    font-size: 14px;
+    color: #555;
+    font-weight: 500;
 }
 
 #remove-checked-btn {
-    background-color: #4A90E2;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
+    background-color: transparent;
+    color: #c44;
+    border: 2px solid #fdd;
+    padding: 8px 15px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s;
 }
 
 #remove-checked-btn:hover {
-    background-color: #357abd;
+    background-color: #c44;
+    color: white;
+    border-color: #c44;
 }
