@@ -1,7 +1,5 @@
-/* Importa a fonte Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* Estilos gerais com a nova fonte */
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +7,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Fundo com gradiente suave */
 body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
@@ -19,13 +16,11 @@ body {
     padding: 20px;
 }
 
-/* Animação para os elementos aparecerem */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Container principal com efeito de vidro fosco */
 .todo-container {
     width: 100%;
     max-width: 550px;
@@ -37,7 +32,6 @@ body {
     animation: fadeIn 0.5s ease-out;
 }
 
-/* Cabeçalho */
 .todo-header {
     padding: 25px 30px;
 }
@@ -86,13 +80,11 @@ body {
     transform: scale(1.05);
 }
 
-/* Animação para as tarefas entrarem na lista */
 @keyframes slideIn {
     from { opacity: 0; transform: translateX(-20px); }
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* Lista de Tarefas */
 #task-list {
     list-style: none;
     padding: 10px 0;
@@ -115,7 +107,6 @@ body {
     text-decoration-color: #bbb;
 }
 
-/* Checkbox Personalizado */
 #task-list input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
@@ -155,17 +146,16 @@ body {
     transition: color 0.3s;
 }
 
-/* Ações de Editar/Deletar */
 #task-list .task-actions {
     display: flex;
     gap: 10px;
     margin-left: auto;
-    opacity: 0; /* Começa invisível */
+    opacity: 0;
     transition: opacity 0.3s;
 }
 
 #task-list li:hover .task-actions {
-    opacity: 1; /* Aparece ao passar o mouse na tarefa */
+    opacity: 1;
 }
 
 #task-list .task-actions i {
@@ -180,7 +170,6 @@ body {
     transform: scale(1.2);
 }
 
-/* Rodapé */
 .todo-footer {
     display: flex;
     justify-content: space-between;
