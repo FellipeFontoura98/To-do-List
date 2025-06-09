@@ -1,5 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+:root, body[data-active-theme="purple"] {
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --primary-color: #667eea;
+    --primary-color-hover: #5a6fd5;
+}
+body[data-active-theme="blue"] {
+    --bg-gradient-start: #3a7bd5;
+    --bg-gradient-end: #3a6073;
+    --primary-color: #3a7bd5;
+    --primary-color-hover: #2c68b3;
+}
+body[data-active-theme="green"] {
+    --bg-gradient-start: #00b09b;
+    --bg-gradient-end: #96c93d;
+    --primary-color: #00b09b;
+    --primary-color-hover: #009886;
+}
+body[data-active-theme="orange"] {
+    --bg-gradient-start: #f2994a;
+    --bg-gradient-end: #f2c94c;
+    --primary-color: #f2994a;
+    --primary-color-hover: #e08b3f;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,13 +33,40 @@
 }
 
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    transition: background 0.5s ease;
 }
+
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 25px;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+.theme-dot {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    transition: transform 0.2s ease;
+}
+.theme-dot:hover { transform: scale(1.2); }
+.theme-dot[data-theme="purple"] { background: linear-gradient(135deg, #667eea, #764ba2); }
+.theme-dot[data-theme="blue"]   { background: linear-gradient(135deg, #3a7bd5, #3a6073); }
+.theme-dot[data-theme="green"]  { background: linear-gradient(135deg, #00b09b, #96c93d); }
+.theme-dot[data-theme="orange"] { background: linear-gradient(135deg, #f2994a, #f2c94c); }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -35,7 +87,6 @@ body {
 .todo-header {
     padding: 25px 30px;
 }
-
 .todo-header h1 {
     color: #333;
     text-align: center;
@@ -44,12 +95,11 @@ body {
     margin-bottom: 20px;
 }
 
-#task-form {
+.input-wrapper {
     display: flex;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     border-radius: 8px;
 }
-
 #task-input {
     flex-grow: 1;
     border: 2px solid transparent;
@@ -59,13 +109,11 @@ body {
     outline: none;
     transition: border-color 0.3s;
 }
-
 #task-input:focus {
-    border-color: #667eea;
+    border-color: var(--primary-color);
 }
-
 #task-form button {
-    background-color: #667eea;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 0 20px;
@@ -74,31 +122,50 @@ body {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
-
 #task-form button:hover {
-    background-color: #5a6fd5;
+    background-color: var(--primary-color-hover);
     transform: scale(1.05);
+}
+.priority-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    color: #555;
+    font-size: 14px;
+}
+.priority-selector label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
 }
 
 @keyframes slideIn {
     from { opacity: 0; transform: translateX(-20px); }
     to { opacity: 1; transform: translateX(0); }
 }
-
 #task-list {
     list-style: none;
     padding: 10px 0;
 }
-
 #task-list li {
     display: flex;
     align-items: center;
-    padding: 15px 30px;
+    padding: 15px 20px 15px 15px;
     font-size: 16px;
     color: #444;
     border-top: 1px solid #f0f0f0;
     animation: slideIn 0.4s ease-out;
+    border-left: 6px solid transparent;
+    transition: border-left-color 0.3s ease;
 }
+
+#task-list li[data-priority="high"] { border-left-color: #ef5350; }
+#task-list li[data-priority="medium"] { border-left-color: #ffca28; }
+#task-list li[data-priority="low"] { border-left-color: #66bb6a; }
 
 #task-list li.completed .task-text {
     color: #aaa;
@@ -120,16 +187,11 @@ body {
     transition: all 0.3s ease;
     flex-shrink: 0;
 }
-
-#task-list input[type="checkbox"]:hover {
-    border-color: #667eea;
-}
-
+#task-list input[type="checkbox"]:hover { border-color: var(--primary-color); }
 #task-list input[type="checkbox"]:checked {
-    background-color: #667eea;
-    border-color: #667eea;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
-
 #task-list input[type="checkbox"]:checked::after {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
@@ -141,29 +203,24 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 #task-list .task-text {
     flex-grow: 1;
     transition: color 0.3s;
     word-break: break-word;
 }
-
 #task-list .task-actions {
     display: flex;
     gap: 10px;
     margin-left: auto;
-    transition: opacity 0.3s;
 }
-
 #task-list .task-actions i {
     color: #9b9b9b;
     cursor: pointer;
     padding: 5px;
     transition: color 0.3s, transform 0.2s;
 }
-
 #task-list .task-actions i:hover {
-    color: #667eea;
+    color: var(--primary-color);
     transform: scale(1.2);
 }
 
@@ -174,12 +231,10 @@ body {
     padding: 20px 30px;
     background-color: rgba(0, 0, 0, 0.03);
 }
-
 #task-counter {
     color: #555;
     font-weight: 500;
 }
-
 #remove-checked-btn {
     background-color: transparent;
     color: #c44;
@@ -191,7 +246,6 @@ body {
     font-weight: 500;
     transition: all 0.3s;
 }
-
 #remove-checked-btn:hover {
     background-color: #c44;
     color: white;
@@ -199,31 +253,14 @@ body {
 }
 
 @media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    .todo-header,
-    #task-list li,
-    .todo-footer {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    .todo-header h1 {
-        font-size: 24px;
-    }
-
-    #task-input {
-        font-size: 14px;
-    }
-
-    #task-form button {
-        padding: 0 15px;
-    }
-
-    #remove-checked-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
+    body { padding: 10px; }
+    .theme-switcher { top: 10px; right: 10px; }
+    .todo-header { padding: 20px; }
+    #task-list li { padding-left: 15px; padding-right: 15px; }
+    .todo-footer { padding: 15px 20px; }
+    .todo-header h1 { font-size: 24px; }
+    #task-input { font-size: 14px; }
+    #task-form button { padding: 0 15px; }
+    .priority-selector { gap: 10px; font-size: 13px; }
+    #remove-checked-btn { padding: 6px 12px; font-size: 12px; }
 }

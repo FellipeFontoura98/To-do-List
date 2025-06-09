@@ -4,30 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
+
+    <div class="theme-switcher">
+        <div class="theme-dot" data-theme="purple"></div>
+        <div class="theme-dot" data-theme="blue"></div>
+        <div class="theme-dot" data-theme="green"></div>
+        <div class="theme-dot" data-theme="orange"></div>
+    </div>
 
     <div class="todo-container">
         
         <div class="todo-header">
             <h1>TODOLIST</h1>
             <form id="task-form">
-                <input type="text" id="task-input" placeholder="what needs to be done?">
-                <button type="submit">+</button>
+                <div class="input-wrapper">
+                    <input type="text" id="task-input" placeholder="O que precisa ser feito?">
+                    <button type="submit">+</button>
+                </div>
+
+                <div class="priority-selector">
+                    <span>Prioridade:</span>
+                    <label>
+                        <input type="radio" name="priority" value="high"> Alta
+                    </label>
+                    <label>
+                        <input type="radio" name="priority" value="medium"> Média
+                    </label>
+                    <label>
+                        <input type="radio" name="priority" value="low" checked> Baixa
+                    </label>
+                </div>
             </form>
         </div>
         
         <ul id="task-list"></ul>
         
         <div class="todo-footer">
-            <div id="progress-bar-container">
-                <div id="progress-bar"></div>
-            </div>
             <span id="task-counter"></span>
-            <button id="remove-checked-btn">Remove checked <i class="fa-solid fa-xmark"></i></button>
+            <button id="remove-checked-btn">Remover concluídas</button>
         </div>
     </div>
 
