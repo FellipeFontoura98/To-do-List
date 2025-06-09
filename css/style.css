@@ -167,7 +167,7 @@ body {
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: none;
+    font-size: 14px;
     transition: background-color 0.2s;
 }
 
