@@ -70,5 +70,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const taskId = Number(li.getAttribute('data-id'))
         const task = tasks.find(t => t.id === taskId)
+
+        if (target.type === 'checkbox') {
+            task.completed = target.checked
+            renderTasks()
+        }
+
+        if (target.classList.contains('delete-btn')) {
+            tasks = tasks.filter(t => t.id !== taskId)
+            renderTasks()
+        }
+
+        if (target.classList.contains('edit-btn')) {
+            const taskTextSpan = li.querySelector('.task-text')
+            const currentText = taskTextSpan.textContent
+
+            const input = document.createElement('input')
+            input.type = 'text'
+            input.value = currentText
+            input.style.flexGrow = '1'
+
+            li.replaceChild(input, taskTextSpan)
+            input.focus()
+
+            const saveEdit = () => {
+                const newText = input.value.trim()
+                if (newText) {
+                    task.text = newText
+                }
+            }
+        }
     })
 })
