@@ -1,13 +1,12 @@
-const CACHE_NAME = 'todo-list-cache-v1';
+const CACHE_NAME = 'todo-list-cache-v2'; // Mudei a versão para forçar a atualização
 const urlsToCache = [
   '/',
   'index.html',
   'css/style.css',
   'javascript/script.js',
-  'manifest/manifest.json',
-  'imagens/icon-192.png',
-  'imagens/icon-512.png'
-  // Adicione aqui os caminhos para os ícones, ex: 'images/icon-192.png'
+  'manifest.json',
+  'images/icon-192.png',
+  'images/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
@@ -24,10 +23,8 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
+        // Se o recurso estiver no cache, retorna ele. Senão, busca na rede.
+        return response || fetch(event.request);
       })
   );
 });
