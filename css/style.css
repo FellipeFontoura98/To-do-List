@@ -152,12 +152,7 @@ body {
     display: flex;
     gap: 10px;
     margin-left: auto;
-    opacity: 0;
     transition: opacity 0.3s;
-}
-
-#task-list li:hover .task-actions {
-    opacity: 1;
 }
 
 #task-list .task-actions i {
