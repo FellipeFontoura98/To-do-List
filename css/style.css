@@ -7,10 +7,10 @@
     --primary-color-hover: #5a6fd5;
 }
 body[data-active-theme="blue"] {
-    --bg-gradient-start: #3a7bd5;
-    --bg-gradient-end: #3a6073;
-    --primary-color: #3a7bd5;
-    --primary-color-hover: #2c68b3;
+    --bg-gradient-start: #43cea2;
+    --bg-gradient-end: #185a9d;
+    --primary-color: #43cea2;
+    --primary-color-hover: #2e9a7e;
 }
 body[data-active-theme="green"] {
     --bg-gradient-start: #00b09b;
@@ -24,6 +24,7 @@ body[data-active-theme="orange"] {
     --primary-color: #f2994a;
     --primary-color-hover: #e08b3f;
 }
+
 
 * {
     margin: 0;
